@@ -1,0 +1,84 @@
+    {%- when 'brand_information' -%}
+    <div class="footer-block__brand-info">
+      {%- if block.settings.brand_image != blank -%}
+        {%- assign brand_image_height = block.settings.brand_image_width
+          | divided_by: block.settings.brand_image.aspect_ratio
+        -%}
+        <div
+          class="footer-block__image-wrapper"
+          style="max-width: min(100%, {{ block.settings.brand_image_width }}px);"
+        >
+          {{
+            block.settings.brand_image
+            | image_url: width: 1100
+            | image_tag:
+              loading: 'lazy',
+              widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
+              height: brand_image_height,
+              width: block.settings.brand_image_width
+          }}
+        </div>
+      {%- endif -%}
+      {%- if block.settings.brand_headline != blank -%}
+        <h2 class="footer-block__heading rte">{{ block.settings.brand_headline }}</h2>
+      {%- endif -%}
+      {%- if block.settings.brand_description != blank -%}
+        <div class="rte">{{ block.settings.brand_description }}</div>
+      {%- endif -%}
+      {%- if block.settings.show_social and section.settings.has_social_icons -%}
+        {%- render 'icons-list-social', class: 'footer__list-social' -%}
+      {%- endif -%}
+    </div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "brand_information",
+      "name": "Brand Information",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_image",
+          "label": "Brand Image"
+        },
+        {
+          "type": "number",
+          "id": "brand_image_width",
+          "label": "Image width (px)",
+          "default": 200
+        },
+        {
+          "type": "number",
+          "id": "brand_image_height",
+          "label": "Image Height (px)",
+          "default": 83
+        },
+        {
+          "type": "text",
+          "id": "brand_headline",
+          "label": "Brand Headline"
+        },
+        {
+          "type": "textarea",
+          "id": "brand_description",
+          "label": "Brand Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Show Social Icons"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}
