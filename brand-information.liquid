@@ -1,4 +1,43 @@
-    {%- when 'brand_information' -%}
+{% style %}
+/* Brand Information */
+.footer-block__image-wrapper {
+  margin-bottom: 2rem;
+  overflow: hidden !important;
+}
+
+.footer-block__image-wrapper img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.footer-block__brand-info {
+  text-align: left;
+}
+
+.footer-block:only-child .footer-block__brand-info {
+  text-align: center;
+}
+
+.footer-block:only-child > .footer-block__brand-info > .footer-block__image-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-block:only-child .footer-block__brand-info .footer__list-social.list-social {
+  justify-content: center;
+}
+
+.footer-block__brand-info .footer__list-social.list-social {
+  justify-content: flex-start;
+  margin-left: -1.3rem;
+  margin-right: -1.3rem;
+}
+
+{% endstyle %}
+
+
+{%- when 'brand_information' -%}
     <div class="footer-block__brand-info">
       {%- if block.settings.brand_image != blank -%}
         {%- assign brand_image_height = block.settings.brand_image_width
